@@ -5,7 +5,7 @@ class AppColors{
 static Color accentColor = Color(0xffC147E9);
   static Color accentColor2 = Color(0xff1D1D1D);
   static Color accentColor3 = Color(0xff292929);
-  static Color txtColor = Color(0xffFFFFFF);
+  static Color txtColor = Colors.black;
   static Color txtColor2 = Color(0xffE8E8E8);
   
 }
