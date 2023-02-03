@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:lecturenet/helpers/palette.dart';
 
+import '../sound.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -54,7 +56,9 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
-        body: Container(),
+        body: Container(
+          child: MyHomePage(),
+        ),
       ),
       drawer: SafeArea(
         child: Container(
