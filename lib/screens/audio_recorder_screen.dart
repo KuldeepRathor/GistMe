@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_sound/flutter_sound.dart' as a;
 import 'package:google_speech/google_speech.dart';
+import 'package:lecturenet/helpers/palette.dart';
 import 'package:pdf_text/pdf_text.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:http/http.dart' as http;
@@ -413,72 +414,83 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
             Padding(
-              padding: const EdgeInsets.all(18.0),
+              padding: const EdgeInsets.fromLTRB(20, 0, 19, 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    "${textofPDF.length / 5} ${calculateWords(text: textofPDF).length}",
+                    "wc:${textofPDF.length / 5} ${calculateWords(text: textofPDF).length}",
                   ),
                 ],
               ),
             ),
             SizedBox(
-              height: size.height * 0.05,
+              height: size.height * 0.04,
             ),
 
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  // Container(),
-                  ElevatedButton(
-                    style:
-                        ElevatedButton.styleFrom(primary: Colors.purple.shade100),
-                    onPressed: selectPDF,
-                    child: Row(
-                      // ignore: prefer_const_literals_to_create_immutables
-                      children: [
-                        Icon(Icons.picture_as_pdf_outlined),
-                        Text(
-                          "Select PDF",
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                // Container(),
+                Column(
+                  children: [
+                    Container(
+                      height: 60,
+                      width: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: AppColors.bgColor
+                      ),
+                      child:InkWell(
+                        onTap:  selectPDF,
+                          child: Image.asset('assets/icons/select.png')),
                     ),
-                  ),
-                  ElevatedButton(
-                    style:
-                        ElevatedButton.styleFrom(primary: Colors.purple.shade100),
-                    onPressed: createPDF,
-                    child: Row(
-                      children: [
-                        Icon(Icons.picture_as_pdf),
-                        Text(
-                          "Create PDF",
-                          style: TextStyle(color: Colors.black),
+                    Text('Select Pdf'),
+],
+                ),
+                Column(
+                  children: [
+                    Container(
+                        height: 60,
+                        width: 60,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: AppColors.bgColor
                         ),
-                      ],
+                      child:InkWell(
+                          onTap:  selectPDF,
+                          child: Image.asset('assets/icons/create.png',
+                          )
+                      ),
                     ),
-                  ),
-                  ElevatedButton(
-                    style:
-                        ElevatedButton.styleFrom(primary: Colors.purple.shade100),
-                    onPressed: generateSummary,
-                    child: Row(
-                      children: [
-                        Icon(Icons.picture_as_pdf_sharp),
-                        Text(
-                          "Generate Summary",
-                          style: TextStyle(color: Colors.black),
+                    Text('Create Pdf')
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
+                        height: 60,
+                        width: 60,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: AppColors.bgColor
                         ),
-                      ],
+                      child:InkWell(
+                          onTap:  generateSummary,
+                          child: Image.asset('assets/icons/summary.png')),
                     ),
-                  ),
-                ],
-              ),
+                    Text('Summarize')
+                  ],
+                ),
+
+
+              ],
             ),
+            SizedBox(
+              height: size.height * 0.03,
+            ),
+
+
             // TextButton(
             //     onPressed: transcribe, child: Text("Generate Transcript")),
             // SizedBox(

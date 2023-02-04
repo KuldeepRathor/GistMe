@@ -15,11 +15,11 @@ class MyApp extends StatelessWidget {
       title: 'Material App',
       theme: ThemeData(
         scaffoldBackgroundColor: Color(0xffFEDEFF),
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
-          backgroundColor: Color(0xff810ca8),
-        ),
+        // floatingActionButtonTheme: FloatingActionButtonThemeData(
+        //   backgroundColor: Color(0xff810ca8),
+        // ),
         appBarTheme: AppBarTheme(
-          color: Color(0xff93C6E7),
+          color: AppColors.bgColor
         ),
         // textTheme: TextTheme(bodyMedium: )
       ),

@@ -43,8 +43,7 @@ class _HomePageState extends State<HomePage> {
       ),
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: AppColors.accentColor,
-          title: const Text('GISTME',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700 ) ),
+          title: Text('GISTME',style: TextStyle(color: AppColors.txtColor,fontWeight: FontWeight.w700 ) ),
           centerTitle: true,
           leading: IconButton(
             onPressed: _handleMenuButtonPressed,
@@ -53,7 +52,7 @@ class _HomePageState extends State<HomePage> {
               builder: (_, value, __) {
                 return AnimatedSwitcher(
                   duration: Duration(milliseconds: 250),
-                  child: Image.asset( value.visible?'assets/icons/menu.png': 'assets/icons/menu.png',width: 30,height: 30,
+                  child: Image.asset( value.visible?'assets/icons/close.png': 'assets/icons/menu.png',width: 30,height: 30,
                   ),
                   // child: Icon(
                   //   value.visible ? Icons.clear : Icons.menu,
@@ -86,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
-                      color: Colors.black26,
+                      color: AppColors.txtColor,
                       shape: BoxShape.circle,
                     ),
                     child: CircleAvatar(
@@ -104,14 +103,14 @@ class _HomePageState extends State<HomePage> {
                     'Hey 👋',
                     style: TextStyle(
                       fontSize: 26,
-                      color: Colors.white,
+                      color:AppColors.txtColor,
                     ),
                   ),
                   Text(
-                    'Welcome to LectureNet',
+                    'Welcome to Gistme',
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.white54,
+                      color: AppColors.txtColor,
                     ),
                   ),
                   SizedBox(
@@ -120,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                   ),
 
                   Divider(
-                    color: Colors.white,
+                    color: AppColors.txtColor
                   ),
 
                   ListTile(
@@ -173,7 +172,7 @@ class _HomePageState extends State<HomePage> {
                   ),
 
                   Divider(
-                    color: Colors.white,
+                    color:AppColors.txtColor,
                   ), // Expanded(
                   //   child: Padding(
                   //     padding: const EdgeInsets.all(8.0),
@@ -209,7 +208,7 @@ class _HomePageState extends State<HomePage> {
                   DefaultTextStyle(
                     style: TextStyle(
                       fontSize: 12,
-                      color: Colors.white54,
+                      color: AppColors.txtColor,
                     ),
                     child: Container(
                       margin: const EdgeInsets.symmetric(
