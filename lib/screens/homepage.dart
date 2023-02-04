@@ -6,6 +6,7 @@ import 'package:lecturenet/helpers/palette.dart';
 import 'package:lecturenet/screens/audio_recorder_screen.dart';
 import 'package:lecturenet/screens/favourites.dart';
 import 'package:lecturenet/screens/profile.dart';
+
 import 'package:lecturenet/screens/settings.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     Size size = MediaQuery.of(context).size;
 
     return AdvancedDrawer(
-      backdropColor: AppColors.bgColor,
+      backdropColor:AppColors.bgColor,
       controller: _advancedDrawerController,
       animationCurve: Curves.easeInOut,
       animationDuration: const Duration(milliseconds: 300),
@@ -42,7 +43,7 @@ class _HomePageState extends State<HomePage> {
       ),
       child: Scaffold(
         appBar: AppBar(
-          // backgroundColor: AppColors.accentColor,
+          backgroundColor: AppColors.accentColor,
           title: const Text('GISTME',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700 ) ),
           centerTitle: true,
           leading: IconButton(
@@ -68,7 +69,7 @@ class _HomePageState extends State<HomePage> {
       drawer: SafeArea(
         child: Container(
           child: ListTileTheme(
-            textColor: Colors.white,
+            textColor: AppColors.txtColor,
             iconColor: Colors.white,
             child: Padding(
               padding: const EdgeInsets.all(18.0),
@@ -139,7 +140,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Profile(),
+                          builder: (context) => USER_PROFILE(),
                         ),
                       );
                     },
@@ -167,13 +168,10 @@ class _HomePageState extends State<HomePage> {
                         ),
                       );
                     },
-                    leading: Icon(Icons.settings),
-                    title: Text('Settings'),
+                    leading: Icon(Icons.card_giftcard_outlined),
+                    title: Text('Refer a friend'),
                   ),
-                  SizedBox(
-                    height: size.height * 0.25,
 
-                  ),
                   Divider(
                     color: Colors.white,
                   ), // Expanded(
