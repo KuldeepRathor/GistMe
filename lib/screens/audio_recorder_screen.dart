@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   File? selectedFile;
 
   var selectedFilePdf;
-  String textofPDF = "Nothing";
+  String textofPDF = "Text will appear here";
   bool loading = false;
   // List? words;
   Future<String> sendToGPT({required List words}) async {
@@ -388,8 +388,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   : Container(
                       width: size.width * 0.9,
                       decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            width: 2, color: Colors.black
+                          ),
+                        //color: Colors.grey,
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       child: SingleChildScrollView(
                         child: Padding(
@@ -400,8 +403,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             //     : selectedFile!.paths.toString(),
                             textofPDF,
                             style: TextStyle(
-                              fontSize: 24,
-                              color: Colors.white,
+                              fontSize: 20,
+                              color: Colors.black26
                             ),
                           ),
                         ),
@@ -416,7 +419,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Text(
                     "${textofPDF.length / 5} ${calculateWords(text: textofPDF).length}",
-                    style: TextStyle(color: Colors.white),
                   ),
                 ],
               ),
