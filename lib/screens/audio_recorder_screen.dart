@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import, prefer_const_constructors
+
 import 'dart:convert';
 import 'dart:io';
 import 'package:audioplayers/audioplayers.dart';
@@ -146,7 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<String> summarizeInBulletPoints(String text) async {
-    final apiKey = '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';
+    final apiKey = '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';
     final model = 'text-curie-001';
     final prompt = 'Summarize this in bullet points:\n$text\n';
     final temperature = 0.7;
@@ -174,7 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
       );
 
       if (response.statusCode != 200) {
-        print('Request failed with status code: ${response.statusCode}');
+        print('Request failed with status code: ${response.reasonPhrase}');
         return "Something Went Wrong";
       } else {
         final responseJson = jsonDecode(response.body);
@@ -279,147 +281,208 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-        floatingActionButton: AvatarGlow(
-          animate: recorder.isRecording,
-          glowColor: Colors.purple.shade100,
-          endRadius: 75.0,
-          duration: const Duration(milliseconds: 2000),
-          repeatPauseDuration: const Duration(milliseconds: 100),
-          repeat: true,
-          child: FloatingActionButton(
-            onPressed: () async {
-              if (recorder.isRecording) {
-                await stop();
+      // floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      // floatingActionButton: AvatarGlow(
+      //   animate: recorder.isRecording,
+      //   glowColor: Colors.purple.shade100,
+      //   endRadius: 75.0,
+      //   duration: const Duration(milliseconds: 2000),
+      //   repeatPauseDuration: const Duration(milliseconds: 100),
+      //   repeat: true,
+      //   child: FloatingActionButton(
+      //     onPressed: () async {
+      //       if (recorder.isRecording) {
+      //         await stop();
 
-                setState(() {
-                  completedRecording = true;
-                });
-              } else {
-                await record();
-                setState(() {});
-              }
-            },
-            child: Icon(recorder.isRecording ? Icons.mic : Icons.mic_none),
-          ),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              StreamBuilder<a.RecordingDisposition>(
-                builder: (context, snapshot) {
-                  final duration = snapshot.hasData
-                      ? snapshot.data!.duration
-                      : Duration.zero;
+      //         setState(() {
+      //           completedRecording = true;
+      //         });
+      //       } else {
+      //         await record();
+      //         setState(() {});
+      //       }
+      //     },
+      //     child: Icon(recorder.isRecording ? Icons.mic : Icons.mic_none),
+      //   ),
+      // ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // StreamBuilder<a.RecordingDisposition>(
+            //   builder: (context, snapshot) {
+            //     final duration = snapshot.hasData
+            //         ? snapshot.data!.duration
+            //         : Duration.zero;
 
-                  String twoDigits(int n) => n.toString().padLeft(2, '0');
+            //     String twoDigits(int n) => n.toString().padLeft(2, '0');
 
-                  final twoDigitMinutes =
-                      twoDigits(duration.inMinutes.remainder(60));
-                  final twoDigitSeconds =
-                      twoDigits(duration.inSeconds.remainder(60));
+            //     final twoDigitMinutes =
+            //         twoDigits(duration.inMinutes.remainder(60));
+            //     final twoDigitSeconds =
+            //         twoDigits(duration.inSeconds.remainder(60));
 
-                  return Text(
-                    '$twoDigitMinutes:$twoDigitSeconds',
-                    style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  );
-                },
-                stream: recorder.onProgress,
-              ),
-              const SizedBox(height: 20),
-              completedRecording || selectedFile != null
-                  ? InkWell(
-                      onTap: () async {
-                        setState(() {
-                          playingAudio = !playingAudio;
-                        });
-                        if (playingAudio) {
-                          // player.play(ap.AudioPlayer().);
-                          // player.play(selectedFile!.path);
-                          await player.play(
-                            DeviceFileSource(selectedFile!.path),
-                          );
-                        } else {
-                          await player.pause();
-                        }
-                      },
-                      child: Icon(
-                        playingAudio ? Icons.pause : Icons.play_arrow,
-                        color: Colors.white,
-                        size: 60,
-                      ),
-                    )
-                  : Container(),
-              TextButton(
-                  onPressed: () async {
-                    FilePickerResult? result =
-                        await FilePicker.platform.pickFiles(
-                      type: FileType.custom,
-                      allowedExtensions: ['m4a'],
-                      allowCompression: false,
-                    );
-                    if (result != null) {
-                      print("done");
+            //     return Text(
+            //       '$twoDigitMinutes:$twoDigitSeconds',
+            //       style: const TextStyle(
+            //           fontSize: 20,
+            //           fontWeight: FontWeight.bold,
+            //           color: Colors.white),
+            //     );
+            //   },
+            //   stream: recorder.onProgress,
+            // ),
+            SizedBox(
+              height: size.height * 0.05,
+            ),
+            completedRecording || selectedFile != null
+                ? InkWell(
+                    onTap: () async {
                       setState(() {
-                        selectedFile = File(result.paths[0]!);
+                        playingAudio = !playingAudio;
                       });
-                    }
-                  },
-                  child: Text(
-                    'Select file',
-                  )),
-              Expanded(
-                child: loading
-                    ? Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : Container(
-                        // color: Colors.blue,
-                        child: SingleChildScrollView(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SelectableText(
-                              // selectedFile == null
-                              //     ? "null"
-                              //     : selectedFile!.paths.toString(),
-                              textofPDF,
-
-                              style: TextStyle(fontSize: 24),
+                      if (playingAudio) {
+                        // player.play(ap.AudioPlayer().);
+                        // player.play(selectedFile!.path);
+                        await player.play(
+                          DeviceFileSource(selectedFile!.path),
+                        );
+                      } else {
+                        await player.pause();
+                      }
+                    },
+                    child: Icon(
+                      playingAudio ? Icons.pause : Icons.play_arrow,
+                      color: Colors.white,
+                      size: 60,
+                    ),
+                  )
+                : Container(),
+            // TextButton(
+            //   onPressed: () async {
+            //     FilePickerResult? result =
+            //         await FilePicker.platform.pickFiles(
+            //       type: FileType.custom,
+            //       allowedExtensions: ['m4a'],
+            //       allowCompression: false,
+            //     );
+            //     if (result != null) {
+            //       print("done");
+            //       setState(() {
+            //         selectedFile = File(result.paths[0]!);
+            //       });
+            //     }
+            //   },
+            //   child: Text(
+            //     'Select file',
+            //   ),
+            // ),
+            Expanded(
+              child: loading
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Container(
+                      width: size.width * 0.9,
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SelectableText(
+                            // selectedFile == null
+                            //     ? "null"
+                            //     : selectedFile!.paths.toString(),
+                            textofPDF,
+                            style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.white,
                             ),
                           ),
                         ),
                       ),
+                    ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    "${textofPDF.length / 5} ${calculateWords(text: textofPDF).length}",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
               ),
-              SizedBox(
-                height: 50,
+            ),
+            SizedBox(
+              height: size.height * 0.05,
+            ),
+
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // Container(),
+                  ElevatedButton(
+                    style:
+                        ElevatedButton.styleFrom(primary: Colors.purple.shade100),
+                    onPressed: selectPDF,
+                    child: Row(
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: [
+                        Icon(Icons.picture_as_pdf_outlined),
+                        Text(
+                          "Select PDF",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ],
+                    ),
+                  ),
+                  ElevatedButton(
+                    style:
+                        ElevatedButton.styleFrom(primary: Colors.purple.shade100),
+                    onPressed: createPDF,
+                    child: Row(
+                      children: [
+                        Icon(Icons.picture_as_pdf),
+                        Text(
+                          "Create PDF",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ],
+                    ),
+                  ),
+                  ElevatedButton(
+                    style:
+                        ElevatedButton.styleFrom(primary: Colors.purple.shade100),
+                    onPressed: generateSummary,
+                    child: Row(
+                      children: [
+                        Icon(Icons.picture_as_pdf_sharp),
+                        Text(
+                          "Generate Summary",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                  "The word count is ${textofPDF.length / 5} ${calculateWords(text: textofPDF).length}"),
-              TextButton(onPressed: selectPDF, child: Text("Select PDF")),
-              SizedBox(
-                height: 10,
-              ),
-              TextButton(onPressed: createPDF, child: Text("Create PDF")),
-              SizedBox(
-                height: 18,
-              ),
-              TextButton(
-                  onPressed: generateSummary, child: Text("Generate Summary")),
-              SizedBox(
-                height: 18,
-              ),
-              TextButton(
-                  onPressed: transcribe, child: Text("Generate Transcript")),
-              SizedBox(
-                height: 18,
-              )
-            ],
-          ),
-        ));
+            ),
+            // TextButton(
+            //     onPressed: transcribe, child: Text("Generate Transcript")),
+            // SizedBox(
+          ],
+        ),
+      ),
+    );
   }
 }

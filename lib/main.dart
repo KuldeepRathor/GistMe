@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lecturenet/helpers/palette.dart';
 import 'package:lecturenet/screens/homepage.dart';
+import 'package:lecturenet/screens/introduction_animation/introduction_animation_screen.dart';
+import 'package:lecturenet/sound.dart';
 
 void main() => runApp(const MyApp());
 
