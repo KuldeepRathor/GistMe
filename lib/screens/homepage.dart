@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:lecturenet/helpers/palette.dart';
+import 'package:lecturenet/screens/audio_recorder_screen.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -36,7 +37,7 @@ class _HomePageState extends State<HomePage> {
       ),
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: AppColors.accentColor,
+          // backgroundColor: AppColors.accentColor,
           title: const Text('LectureNet'),
           leading: IconButton(
             onPressed: _handleMenuButtonPressed,
@@ -54,7 +55,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
-        body: Container(),
+        body: MyHomePage(),
       ),
       drawer: SafeArea(
         child: Container(
@@ -88,29 +89,38 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 26,
                       color: Colors.white,
                     )),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-
-                    children: [
-                      ListView.builder(
-                        itemBuilder: ((context, index) {
-                          return Text(
-                            'data',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.white,
-                            ),
-                          );
-                        }),
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount: 10,
-                      ),
-                    ],
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            physics: BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: 30,
+                            itemBuilder: ((context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: Text(
+                                    'data',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                Spacer(),
+                // Spacer(),
                 DefaultTextStyle(
                   style: TextStyle(
                     fontSize: 12,
