@@ -8,6 +8,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_sound/flutter_sound.dart' as a;
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_speech/google_speech.dart';
 import 'package:lecturenet/helpers/palette.dart';
 import 'package:pdf_text/pdf_text.dart';
@@ -149,7 +150,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<String> summarizeInBulletPoints(String text) async {
+
     final apiKey = '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';
+
     final model = 'text-curie-001';
     final prompt = 'Summarize this in bullet points:\n$text\n';
     final temperature = 0.7;
@@ -413,11 +416,13 @@ class _MyHomePageState extends State<MyHomePage> {
                             // selectedFile == null
                             //     ? "null"
                             //     : selectedFile!.paths.toString(),
+
                             textofPDF.trim(),
                             style: TextStyle(
                               fontSize: 20,
                               color: Colors.black26,
                             ),
+
                           ),
                         ),
                       ),
@@ -455,7 +460,11 @@ class _MyHomePageState extends State<MyHomePage> {
                           onTap: selectPDF,
                           child: Image.asset('assets/icons/select.png')),
                     ),
-                    Text('Select Pdf'),
+
+                    Text('Select Pdf',
+                        style: GoogleFonts.orbitron(
+                            fontSize: 12, fontWeight: FontWeight.w600)),
+
                   ],
                 ),
                 Column(
@@ -467,12 +476,16 @@ class _MyHomePageState extends State<MyHomePage> {
                           borderRadius: BorderRadius.circular(12),
                           color: AppColors.bgColor),
                       child: InkWell(
+
                           onTap: createPDF,
+
                           child: Image.asset(
                             'assets/icons/create.png',
                           )),
                     ),
-                    Text('Create Pdf')
+                    Text('Create Pdf',
+                        style: GoogleFonts.orbitron(
+                            fontSize: 12, fontWeight: FontWeight.w600)),
                   ],
                 ),
                 Column(
@@ -487,7 +500,11 @@ class _MyHomePageState extends State<MyHomePage> {
                           onTap: generateSummary,
                           child: Image.asset('assets/icons/summary.png')),
                     ),
-                    Text('Summarize')
+                    Text(
+                      'Summarize',
+                      style: GoogleFonts.orbitron(
+                          fontSize: 12, fontWeight: FontWeight.w600),
+                    ),
                   ],
                 ),
               ],
