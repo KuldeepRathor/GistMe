@@ -2,7 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lecturenet/helpers/palette.dart';
+import 'package:lecturenet/screens/app_drawer_screens/feedback_screen.dart';
+import 'package:lecturenet/screens/app_drawer_screens/help_screen.dart';
+import 'package:lecturenet/screens/app_drawer_screens/invite_friend_screen.dart';
 import 'package:lecturenet/screens/audio_recorder_screen.dart';
 import 'package:lecturenet/screens/favourites.dart';
 import 'package:lecturenet/screens/profile.dart';
@@ -22,7 +26,7 @@ class _HomePageState extends State<HomePage> {
     Size size = MediaQuery.of(context).size;
 
     return AdvancedDrawer(
-      backdropColor:AppColors.bgColor,
+      backdropColor: AppColors.bgColor,
       controller: _advancedDrawerController,
       animationCurve: Curves.easeInOut,
       animationDuration: const Duration(milliseconds: 300),
@@ -43,7 +47,13 @@ class _HomePageState extends State<HomePage> {
       ),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('GISTME',style: TextStyle(color: AppColors.txtColor,fontWeight: FontWeight.w700 ) ),
+          title: Text(
+            'Gistme',
+            style: GoogleFonts.orbitron(
+                color: AppColors.txtColor,
+                fontSize: 25,
+                fontWeight: FontWeight.w500),
+          ),
           centerTitle: true,
           leading: IconButton(
             onPressed: _handleMenuButtonPressed,
@@ -52,7 +62,12 @@ class _HomePageState extends State<HomePage> {
               builder: (_, value, __) {
                 return AnimatedSwitcher(
                   duration: Duration(milliseconds: 250),
-                  child: Image.asset( value.visible?'assets/icons/close.png': 'assets/icons/menu.png',width: 30,height: 30,
+                  child: Image.asset(
+                    value.visible
+                        ? 'assets/icons/close.png'
+                        : 'assets/icons/menu.png',
+                    width: 30,
+                    height: 30,
                   ),
                   // child: Icon(
                   //   value.visible ? Icons.clear : Icons.menu,
@@ -99,28 +114,21 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  Text(
-                    'Hey 👋',
-                    style: TextStyle(
-                      fontSize: 26,
-                      color:AppColors.txtColor,
-                    ),
-                  ),
-                  Text(
-                    'Welcome to Gistme',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: AppColors.txtColor,
-                    ),
-                  ),
+                  Text('Hey 👋',
+                      style: GoogleFonts.orbitron(
+                          color: AppColors.txtColor,
+                          fontSize: 25,
+                          fontWeight: FontWeight.w500)),
+                  Text('Welcome to Gistme',
+                      style: GoogleFonts.orbitron(
+                        color: AppColors.txtColor,
+                        fontSize: 16,
+                      )),
                   SizedBox(
                     height: size.height * 0.01,
-
                   ),
 
-                  Divider(
-                    color: AppColors.txtColor
-                  ),
+                  Divider(color: AppColors.txtColor),
 
                   ListTile(
                     onTap: () {
@@ -144,35 +152,65 @@ class _HomePageState extends State<HomePage> {
                       );
                     },
                     leading: Icon(Icons.account_circle_rounded),
-                    title: Text('Profile'),
-                  ),
+                    title: Text('Profile',
+                        style: GoogleFonts.orbitron(
+                          color: AppColors.txtColor,
+                          fontSize: 16,
+                        )),
+                    ),
+                  
+
                   ListTile(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Favourites(),
+                          builder: (context) => HelpScreen(),
                         ),
                       );
                     },
-                    leading: Icon(Icons.favorite),
-                    title: Text('Favourites'),
+                    leading: Icon(Icons.help_center_sharp),
+                    title: Text('Help',
+                        style: GoogleFonts.orbitron(
+                          color: AppColors.txtColor,
+                          fontSize: 16,
+                        )),
                   ),
                   ListTile(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Settings(),
+                          builder: (context) => FeedbackScreen(),
+                        ),
+                      );
+                    },
+                    leading: Icon(Icons.feedback_sharp),
+                    title: Text('Feedback',
+                        style: GoogleFonts.orbitron(
+                          color: AppColors.txtColor,
+                          fontSize: 16,
+                        )),
+                  ),
+                  ListTile(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => InviteFriend(),
                         ),
                       );
                     },
                     leading: Icon(Icons.card_giftcard_outlined),
-                    title: Text('Refer a friend'),
+                    title: Text('Refer a friend',
+                        style: GoogleFonts.orbitron(
+                          color: AppColors.txtColor,
+                          fontSize: 16,
+                        )),
                   ),
 
                   Divider(
-                    color:AppColors.txtColor,
+                    color: AppColors.txtColor,
                   ), // Expanded(
                   //   child: Padding(
                   //     padding: const EdgeInsets.all(8.0),
