@@ -121,12 +121,12 @@ class _MyHomePageState extends State<MyHomePage> {
     //  Make an API Call to OpenAI
 
     List<String?> words = [];
-    words = calculateWords(text: textofPDF);
+    words = calculateWords(text: textofPDF.trim());
     // // List<String?>? sendWord = [];
     // // sendWord = words;
     words.add("thelistisended");
 
-    final pdfFile = await PdfApi.generateCenteredText(textofPDF, words);
+    final pdfFile = await PdfApi.generateCenteredText(textofPDF.trim(), words);
     PdfApi.openFile(pdfFile);
   }
 
@@ -149,7 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<String> summarizeInBulletPoints(String text) async {
-    final apiKey = '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';
+    final apiKey = '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';
     final model = 'text-curie-001';
     final prompt = 'Summarize this in bullet points:\n$text\n';
     final temperature = 0.7;
@@ -384,14 +384,25 @@ class _MyHomePageState extends State<MyHomePage> {
             Expanded(
               child: loading
                   ? Center(
-                      child: CircularProgressIndicator(),
+                      child: Container(
+                        width: size.width * 0.9,
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 2, color: Colors.black),
+                          //color: Colors.grey,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image.asset(
+                            "assets/introduction_animation/loading_animation.gif",
+                          ),
+                        ),
+                      ),
                     )
                   : Container(
                       width: size.width * 0.9,
                       decoration: BoxDecoration(
-                          border: Border.all(
-                            width: 2, color: Colors.black
-                          ),
+                        border: Border.all(width: 2, color: Colors.black),
                         //color: Colors.grey,
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -402,10 +413,10 @@ class _MyHomePageState extends State<MyHomePage> {
                             // selectedFile == null
                             //     ? "null"
                             //     : selectedFile!.paths.toString(),
-                            textofPDF,
+                            textofPDF.trim(),
                             style: TextStyle(
                               fontSize: 20,
-                              color: Colors.black26
+                              color: Colors.black26,
                             ),
                           ),
                         ),
@@ -438,30 +449,28 @@ class _MyHomePageState extends State<MyHomePage> {
                       height: 60,
                       width: 60,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: AppColors.bgColor
-                      ),
-                      child:InkWell(
-                        onTap:  selectPDF,
+                          borderRadius: BorderRadius.circular(12),
+                          color: AppColors.bgColor),
+                      child: InkWell(
+                          onTap: selectPDF,
                           child: Image.asset('assets/icons/select.png')),
                     ),
                     Text('Select Pdf'),
-],
+                  ],
                 ),
                 Column(
                   children: [
                     Container(
-                        height: 60,
-                        width: 60,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: AppColors.bgColor
-                        ),
-                      child:InkWell(
-                          onTap:  selectPDF,
-                          child: Image.asset('assets/icons/create.png',
-                          )
-                      ),
+                      height: 60,
+                      width: 60,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: AppColors.bgColor),
+                      child: InkWell(
+                          onTap: createPDF,
+                          child: Image.asset(
+                            'assets/icons/create.png',
+                          )),
                     ),
                     Text('Create Pdf')
                   ],
@@ -469,27 +478,23 @@ class _MyHomePageState extends State<MyHomePage> {
                 Column(
                   children: [
                     Container(
-                        height: 60,
-                        width: 60,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: AppColors.bgColor
-                        ),
-                      child:InkWell(
-                          onTap:  generateSummary,
+                      height: 60,
+                      width: 60,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: AppColors.bgColor),
+                      child: InkWell(
+                          onTap: generateSummary,
                           child: Image.asset('assets/icons/summary.png')),
                     ),
                     Text('Summarize')
                   ],
                 ),
-
-
               ],
             ),
             SizedBox(
               height: size.height * 0.03,
             ),
-
 
             // TextButton(
             //     onPressed: transcribe, child: Text("Generate Transcript")),

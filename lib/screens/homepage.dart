@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     Size size = MediaQuery.of(context).size;
 
     return AdvancedDrawer(
-      backdropColor:AppColors.bgColor,
+      backdropColor: AppColors.bgColor,
       controller: _advancedDrawerController,
       animationCurve: Curves.easeInOut,
       animationDuration: const Duration(milliseconds: 300),
@@ -43,7 +43,9 @@ class _HomePageState extends State<HomePage> {
       ),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('GISTME',style: TextStyle(color: AppColors.txtColor,fontWeight: FontWeight.w700 ) ),
+          title: Text('GISTME',
+              style: TextStyle(
+                  color: AppColors.txtColor, fontWeight: FontWeight.w700)),
           centerTitle: true,
           leading: IconButton(
             onPressed: _handleMenuButtonPressed,
@@ -52,7 +54,12 @@ class _HomePageState extends State<HomePage> {
               builder: (_, value, __) {
                 return AnimatedSwitcher(
                   duration: Duration(milliseconds: 250),
-                  child: Image.asset( value.visible?'assets/icons/close.png': 'assets/icons/menu.png',width: 30,height: 30,
+                  child: Image.asset(
+                    value.visible
+                        ? 'assets/icons/close.png'
+                        : 'assets/icons/menu.png',
+                    width: 30,
+                    height: 30,
                   ),
                   // child: Icon(
                   //   value.visible ? Icons.clear : Icons.menu,
@@ -103,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                     'Hey 👋',
                     style: TextStyle(
                       fontSize: 26,
-                      color:AppColors.txtColor,
+                      color: AppColors.txtColor,
                     ),
                   ),
                   Text(
@@ -115,21 +122,13 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SizedBox(
                     height: size.height * 0.01,
-
                   ),
 
-                  Divider(
-                    color: AppColors.txtColor
-                  ),
+                  Divider(color: AppColors.txtColor),
 
                   ListTile(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MyHomePage(),
-                        ),
-                      );
+                      Navigator.canPop(context);
                     },
                     leading: Icon(Icons.home),
                     title: Text('Home'),
@@ -172,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                   ),
 
                   Divider(
-                    color:AppColors.txtColor,
+                    color: AppColors.txtColor,
                   ), // Expanded(
                   //   child: Padding(
                   //     padding: const EdgeInsets.all(8.0),
