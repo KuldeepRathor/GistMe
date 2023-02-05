@@ -122,12 +122,12 @@ class _MyHomePageState extends State<MyHomePage> {
     //  Make an API Call to OpenAI
 
     List<String?> words = [];
-    words = calculateWords(text: textofPDF);
+    words = calculateWords(text: textofPDF.trim());
     // // List<String?>? sendWord = [];
     // // sendWord = words;
     words.add("thelistisended");
 
-    final pdfFile = await PdfApi.generateCenteredText(textofPDF, words);
+    final pdfFile = await PdfApi.generateCenteredText(textofPDF.trim(), words);
     PdfApi.openFile(pdfFile);
   }
 
@@ -150,7 +150,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<String> summarizeInBulletPoints(String text) async {
-    final apiKey = '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';
+
+    final apiKey = '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';
+
     final model = 'text-curie-001';
     final prompt = 'Summarize this in bullet points:\n$text\n';
     final temperature = 0.7;
@@ -385,7 +387,20 @@ class _MyHomePageState extends State<MyHomePage> {
             Expanded(
               child: loading
                   ? Center(
-                      child: CircularProgressIndicator(),
+                      child: Container(
+                        width: size.width * 0.9,
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 2, color: Colors.black),
+                          //color: Colors.grey,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image.asset(
+                            "assets/introduction_animation/loading_animation.gif",
+                          ),
+                        ),
+                      ),
                     )
                   : Container(
                       width: size.width * 0.9,
@@ -401,9 +416,13 @@ class _MyHomePageState extends State<MyHomePage> {
                             // selectedFile == null
                             //     ? "null"
                             //     : selectedFile!.paths.toString(),
-                            textofPDF,
-                            style:
-                                TextStyle(fontSize: 20, color: Colors.black26),
+
+                            textofPDF.trim(),
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black26,
+                            ),
+
                           ),
                         ),
                       ),
@@ -441,9 +460,11 @@ class _MyHomePageState extends State<MyHomePage> {
                           onTap: selectPDF,
                           child: Image.asset('assets/icons/select.png')),
                     ),
+
                     Text('Select Pdf',
                         style: GoogleFonts.orbitron(
                             fontSize: 12, fontWeight: FontWeight.w600)),
+
                   ],
                 ),
                 Column(
@@ -455,7 +476,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           borderRadius: BorderRadius.circular(12),
                           color: AppColors.bgColor),
                       child: InkWell(
-                          onTap: selectPDF,
+
+                          onTap: createPDF,
+
                           child: Image.asset(
                             'assets/icons/create.png',
                           )),

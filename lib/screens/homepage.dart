@@ -47,6 +47,7 @@ class _HomePageState extends State<HomePage> {
       ),
       child: Scaffold(
         appBar: AppBar(
+
           title: Text(
             'Gistme',
             style: GoogleFonts.orbitron(
@@ -54,6 +55,7 @@ class _HomePageState extends State<HomePage> {
                 fontSize: 25,
                 fontWeight: FontWeight.w500),
           ),
+
           centerTitle: true,
           leading: IconButton(
             onPressed: _handleMenuButtonPressed,
@@ -114,6 +116,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
+
                   Text('Hey 👋',
                       style: GoogleFonts.orbitron(
                           color: AppColors.txtColor,
@@ -124,6 +127,7 @@ class _HomePageState extends State<HomePage> {
                         color: AppColors.txtColor,
                         fontSize: 16,
                       )),
+
                   SizedBox(
                     height: size.height * 0.01,
                   ),
@@ -132,12 +136,7 @@ class _HomePageState extends State<HomePage> {
 
                   ListTile(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MyHomePage(),
-                        ),
-                      );
+                      Navigator.canPop(context);
                     },
                     leading: Icon(Icons.home),
                     title: Text('Home'),
